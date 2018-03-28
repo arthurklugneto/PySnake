@@ -12,9 +12,14 @@ class Player(object):
 
     def __init__(self):
 
+        initialPosition = globals.playerInitialPosition
+
         self.__mapSize = globals.screenGridSize
-        # TODO : Pegar a posição inicial do global
-        self.__positions = [[20,12],[20,11],[20,10],[20,9],[20,8]]
+        self.__positions = [initialPosition,
+        [initialPosition[0],initialPosition[1]-1],
+        [initialPosition[0],initialPosition[1]-2],
+        [initialPosition[0],initialPosition[1]-3],
+        [initialPosition[0],initialPosition[1]-4]]
         self.__size = globals.playerSize
         self.__color = globals.playerColor
         self.isDead = False
@@ -46,11 +51,9 @@ class Player(object):
 
     def checkDeath(self):
         
-        # TODO : Verificar Melhor a colisão com as bordas. Em alguns casos está passando um bloco
-
         # Verifica colisão com as bordas
         headPosition = self.__positions[0]
-        if headPosition[0] < 0 or headPosition[0] > self.__mapSize[0]:
+        if headPosition[0] < 1 or headPosition[0] > self.__mapSize[0]-2 :
             self.isDead = True
-        if headPosition[1] < 0 or headPosition[1] > self.__mapSize[1]:
+        if headPosition[1] < 1 or headPosition[1] > self.__mapSize[1]-2 :
             self.isDead = True

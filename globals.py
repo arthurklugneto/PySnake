@@ -11,4 +11,4 @@ fps = 60                                                                       #
 refreshRate = 5                                                                # velocidade de atualização. menos é mais rápido
 screenGridSize = (int(screenSize[0]/playerSize),int(screenSize[1]/playerSize)) # quantidade de quadrados do jogo
 playerColor = (0,0,0)                                                          # cor do jogador
-playerInitialPosition = [20,20]                                                # posicao inicial do jogador
+playerInitialPosition = [screenGridSize[0]/2,screenGridSize[1]/2]              # posicao inicial do jogador
