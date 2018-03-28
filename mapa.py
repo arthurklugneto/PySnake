@@ -15,6 +15,9 @@ class Mapa(object):
 
     def draw(self,frameBuffer,pygame):
 
+        # TODO : Isso é ineficiente!!! Monte esse grid em um surface
+        # e desenhe o surface para não precisar passar por esse loop
+        # toda vez que for desenhar a tela
         if globals.config["debug"]:
             for x in range(self.__mapSize[0]):
                 for y in range(self.__mapSize[1]):

@@ -12,3 +12,4 @@ refreshRate = 5                                                                #
 screenGridSize = (int(screenSize[0]/playerSize),int(screenSize[1]/playerSize)) # quantidade de quadrados do jogo
 playerColor = (0,0,0)                                                          # cor do jogador
 playerInitialPosition = [screenGridSize[0]/2,screenGridSize[1]/2]              # posicao inicial do jogador
+initialObstacles = 10                                                          # quantidade de obstaculos iniciais

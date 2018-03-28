@@ -10,7 +10,7 @@ def verifyConfig(screenSize,playerSize):
     print("ERRO : O Tamanho da tela deve ser maior que 200x200 e o tamanho do player deve ser no minimo 4 e deve ser multiplo desses valores.")
     return False
 
-def greetings():s
+def greetings():
     print(globals.config["title"])
     print("Versão  : " + globals.config["version"])
     print("Autores : " + globals.config["authors"])    

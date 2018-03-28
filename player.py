@@ -7,6 +7,7 @@ class Player(object):
     __size = 0
     __color = ""
     __direction = "LEFT"
+    __score = 10
 
     isDead = True
 
@@ -57,3 +58,6 @@ class Player(object):
             self.isDead = True
         if headPosition[1] < 1 or headPosition[1] > self.__mapSize[1]-2 :
             self.isDead = True
+
+    def getScore(self):
+        return self.__score

@@ -15,6 +15,9 @@ from util import *
 # importação dos objetos
 from mapa import Mapa
 from player import Player
+from score import Score
+from obstacles import Obstacles
+from collectables import Collectables
 
 # mostra um texto de boas vindas
 greetings()
@@ -36,7 +39,7 @@ frameBuffer = pygame.display.set_mode((globals.screenSize[0],globals.screenSize[
 pygame.display.set_caption(globals.config["title"])
 
 # define a fonte do texto que será utilizado no jogo
-gameFont = pygame.font.SysFont('Calibri', 24)
+gameFont = pygame.font.SysFont('Calibri', 16)
 
 # define o relógio do jogo
 globals.clock = pygame.time.Clock()
@@ -45,6 +48,9 @@ count = 0
 # cria os objetos do jogo
 mapa = Mapa()
 player = Player()
+score = Score()
+obstacles = Obstacles()
+collectables = Collectables()
 
 # --- LOOP PRINCIPAL DO JOGO ------------------------------------------------------------------------------------------------------------
 try:
@@ -76,7 +82,9 @@ try:
                 player.update()
 
         mapa.draw(frameBuffer,pygame)
-        player.draw(frameBuffer,pygame)        
+        player.draw(frameBuffer,pygame)
+        score.draw(player,gameFont,frameBuffer)
+        obstacles.draw(frameBuffer,pygame)
         
         # atualiza o framebuffer (desenha o que estiver na memória de vídeo)
         pygame.display.flip()
