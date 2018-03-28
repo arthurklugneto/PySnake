@@ -54,15 +54,23 @@ try:
         frameBuffer.fill((200,200,200))
 
         # o usuário fechou o jogo ?
-        ev = pygame.event.poll()
-        if ev.type == pygame.QUIT:
+        event = pygame.event.poll()
+        if event.type == pygame.QUIT:
             pygame.display.quit()
             pygame.quit()
             quit()
-            break   
+            break
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                player.sefDirection("LEFT")
+            if event.key == pygame.K_RIGHT:
+                player.sefDirection("RIGHT")
+            if event.key == pygame.K_UP:
+                player.sefDirection("UP")
+            if event.key == pygame.K_DOWN:
+                player.sefDirection("DOWN")
 
         if not player.isDead :
-    
             # atualiza o player a cada x milisegundos
             if count % globals.refreshRate == 0:
                 player.update()
