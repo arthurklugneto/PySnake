@@ -1,21 +1,22 @@
-# 
-# Rotinas que desenham o grid do mapa na tela
+#   Objeto MAPA
 #
-
+#   Cuida das rotinas pertinentes a gerenciamento do mapa do jogo exceto obstáculos e collectables
+#
 import globals
-
 
 class Mapa(object):
     
-    
-    __mapSize = ""
-    __playerSize = 0
+    # parametros locais do objeto
+    __mapSize = ""                      # tamanho do mapa em quadrados
+    __playerSize = 0                    # tamanho do player em px2 sera carregado do globals
 
     def __init__(self):
 
+        # busca o tamanho do mapa e player do arquivo global
         self.__mapSize = globals.screenGridSize
         self.__playerSize = globals.playerSize
 
+        # se estiver em modo de depuração, avise o jogador sobre o tamanho do mapa criado
         if globals.config["debug"] :
             print("Iniciado novo mapa do jogo com tamanho : " + str(globals.screenGridSize) )
 

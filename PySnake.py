@@ -43,6 +43,8 @@ gameFont = pygame.font.SysFont('Calibri', 16)
 
 # define o relógio do jogo
 globals.clock = pygame.time.Clock()
+
+# contador interno de frames
 count = 0
 
 # cria os objetos do jogo
@@ -66,6 +68,8 @@ try:
             pygame.quit()
             quit()
             break
+
+        # cuida dos eventos de entrada do teclado
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 player.sefDirection("LEFT")
@@ -78,14 +82,16 @@ try:
             if event.key == pygame.K_SPACE:
                 player.setJustEat(True)
 
+        # verifica se o player colidiu com um obstáculo
         if obstacles.checkCollisionWithPlayer(player.getPosition()):
             player.setIsDead(True)
 
+        # atualiza o player caso ele não tenha morrido
         if not player.isDead :
-            # atualiza o player a cada x milisegundos
             if count % globals.refreshRate == 0:
                 player.update()
 
+        # desenha todos os objetos do jogo
         mapa.draw(frameBuffer,pygame)
         player.draw(frameBuffer,pygame)
         score.draw(player,gameFont,frameBuffer)
