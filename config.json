@@ -6,7 +6,7 @@
     "playerSize":8,
     "authors":"Arthur Klug Neto, Luis Fernando de Souza",
     "debug":false,
-    "refreshRate":10,
+    "refreshRate":100,
     "obstacleThreshold":0.5,
     "obstacleGradation":20,
     "totalBoxCollectables":4,
