@@ -69,8 +69,32 @@ try:
             quit()
             break
 
-        # cuida dos eventos de entrada do teclado
+        # nova rotina para entrada de teclado
+        # permite o movimento diagonal do player
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_UP]:
+            player.sefDirection("UP")
+        if keys[pygame.K_DOWN]:
+            player.sefDirection("DOWN")
+        if keys[pygame.K_LEFT]:
+            player.sefDirection("LEFT")
+        if keys[pygame.K_RIGHT]:
+            player.sefDirection("RIGHT")
+        
+        if keys[pygame.K_UP] and keys[pygame.K_LEFT]:
+            player.sefDirection("UP-LEFT")
+        if keys[pygame.K_UP] and keys[pygame.K_RIGHT]:
+            player.sefDirection("UP-RIGHT")
+        if keys[pygame.K_DOWN] and keys[pygame.K_LEFT]:
+            player.sefDirection("DOWN-LEFT")
+        if keys[pygame.K_DOWN] and keys[pygame.K_RIGHT]:
+            player.sefDirection("DOWN-RIGHT")           
+
+        '''
+        # cuida dos eventos de entrada do teclado (antigo)
         if event.type == pygame.KEYDOWN:
+            
             if event.key == pygame.K_LEFT:
                 player.sefDirection("LEFT")
             if event.key == pygame.K_RIGHT:
@@ -79,8 +103,7 @@ try:
                 player.sefDirection("UP")
             if event.key == pygame.K_DOWN:
                 player.sefDirection("DOWN")
-            if event.key == pygame.K_SPACE:
-                player.setJustEat(True)
+        '''       
 
         # verifica se o player colidiu com um obstáculo
         if obstacles.checkCollisionWithPlayer(player.getPosition()):

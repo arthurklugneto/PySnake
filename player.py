@@ -61,6 +61,7 @@ class Player(object):
         # possa ser movimentado
         first = self.__positions[0]
 
+        # movimentos verticais e horizontais
         if self.__direction == "DOWN":
             self.__positions.insert(0,[ first[0],first[1]+1 ])
         if self.__direction == "RIGHT":
@@ -70,12 +71,23 @@ class Player(object):
         if self.__direction == "UP":
             self.__positions.insert(0,[ first[0],first[1]-1 ])
 
+        # movimentos diagonais
+        if self.__direction == "DOWN-RIGHT":
+            self.__positions.insert(0,[ first[0]+1,first[1]+1 ])
+        if self.__direction == "DOWN-LEFT":
+            self.__positions.insert(0,[ first[0]-1,first[1]+1 ])
+        if self.__direction == "UP-RIGHT":
+            self.__positions.insert(0,[ first[0]+1,first[1]-1 ])
+        if self.__direction == "UP-LEFT":
+            self.__positions.insert(0,[ first[0]-1,first[1]-1 ])
+            
         # verifica se o player morreu
         self.checkDeath()
     
     # altera a direção em que o player está de movimentando
     def sefDirection(self,newDirection):
-        self.__direction = newDirection
+        
+       self.__direction = newDirection
 
     def checkDeath(self):
         
