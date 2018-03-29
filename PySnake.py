@@ -50,7 +50,7 @@ mapa = Mapa()
 player = Player()
 score = Score()
 obstacles = Obstacles()
-collectables = Collectables()
+collectables = Collectables(obstacles)
 
 # --- LOOP PRINCIPAL DO JOGO ------------------------------------------------------------------------------------------------------------
 try:
@@ -75,6 +75,11 @@ try:
                 player.sefDirection("UP")
             if event.key == pygame.K_DOWN:
                 player.sefDirection("DOWN")
+            if event.key == pygame.K_SPACE:
+                player.setJustEat(True)
+
+        if obstacles.checkCollisionWithPlayer(player.getPosition()):
+            player.setIsDead(True)
 
         if not player.isDead :
             # atualiza o player a cada x milisegundos
@@ -85,7 +90,8 @@ try:
         player.draw(frameBuffer,pygame)
         score.draw(player,gameFont,frameBuffer)
         obstacles.draw(frameBuffer,pygame)
-        
+        collectables.draw(frameBuffer,pygame)
+
         # atualiza o framebuffer (desenha o que estiver na memória de vídeo)
         pygame.display.flip()
 

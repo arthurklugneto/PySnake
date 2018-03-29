@@ -1,9 +1,9 @@
 {
     "version":"1.0.0",
     "title":"PySnake - Jogo de Snake para Python (Professor Kane Chan)",
-    "screenWidth":200,
-    "screenHeight":200,
-    "playerSize":4,
+    "screenWidth":800,
+    "screenHeight":800,
+    "playerSize":8,
     "authors":"Arthur Klug Neto, Luis Fernando de Souza",
-    "debug":true
+    "debug":false
 }

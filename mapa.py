@@ -1,6 +1,12 @@
+# 
+# Rotinas que desenham o grid do mapa na tela
+#
+
 import globals
 
+
 class Mapa(object):
+    
     
     __mapSize = ""
     __playerSize = 0

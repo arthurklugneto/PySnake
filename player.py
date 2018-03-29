@@ -8,6 +8,7 @@ class Player(object):
     __color = ""
     __direction = "LEFT"
     __score = 10
+    __needToGrow = False
 
     isDead = True
 
@@ -33,7 +34,11 @@ class Player(object):
 
     def update(self):
         
-        self.__positions.pop()
+        if self.__needToGrow:
+            self.__needToGrow = False
+        else:
+            self.__positions.pop()
+
         first = self.__positions[0]
 
         if self.__direction == "DOWN":
@@ -59,5 +64,21 @@ class Player(object):
         if headPosition[1] < 1 or headPosition[1] > self.__mapSize[1]-2 :
             self.isDead = True
 
+        print(self.__positions.index(headPosition))
+
+        # Verifica colisão com próprio corpo
+        for idx,pos in enumerate(self.__positions):
+            if idx!=0 and pos == headPosition:
+                self.isDead = True
+
     def getScore(self):
         return self.__score
+
+    def getPosition(self):
+        return self.__positions[0]
+
+    def setIsDead(self,value):
+        self.isDead = value
+
+    def setJustEat(self,value):
+        self.__needToGrow = value
