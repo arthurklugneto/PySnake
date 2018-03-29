@@ -5,5 +5,14 @@
     "screenHeight":200,
     "playerSize":8,
     "authors":"Arthur Klug Neto, Luis Fernando de Souza",
-    "debug":false
+    "debug":false,
+    "refreshRate":10,
+    "obstacleThreshold":0.5,
+    "obstacleGradation":20,
+    "totalBoxCollectables":4,
+    "totalTriangleCollectables":4,
+    "totalCircleCollectables":4,
+    "pointBox":10,
+    "pointTriangle":20,
+    "pointCircle":30    
 }

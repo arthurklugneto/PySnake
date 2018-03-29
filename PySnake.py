@@ -90,6 +90,7 @@ try:
         if not player.isDead :
             if count % globals.refreshRate == 0:
                 player.update()
+                collectables.update(player)
 
         # desenha todos os objetos do jogo
         mapa.draw(frameBuffer,pygame)

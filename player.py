@@ -13,7 +13,7 @@ class Player(object):
     __size = 0
     __color = ""
     __direction = "LEFT"
-    __score = 10
+    __score = 0
     __needToGrow = False
 
     # o player morreu?
@@ -106,3 +106,7 @@ class Player(object):
     # define que o player acabou de comer um collectable
     def setJustEat(self,value):
         self.__needToGrow = value
+
+    # adiciona ao ponto do jogador
+    def addToScore(self,value):
+        self.__score += value

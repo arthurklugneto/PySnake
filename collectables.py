@@ -4,13 +4,11 @@ from random import randint
 class Collectables(object):
 
     __collectablesBox = []
-    __collectablesBoxColor = (0,0,0)
-
+    __collectablesBoxColor = (0,200,0)
     __collectablesTriangles = []
     __collectablesTrianglesColor = (255,0,0)
-
     __collectablesCircle = []
-    __collectablesCircleColor = (0,0,0)
+    __collectablesCircleColor = (0,0,255)
 
     __mapSize = None
     __playerSize = None
@@ -22,6 +20,10 @@ class Collectables(object):
         self.__obstacles = obstacles
         self.__mapSize = globals.screenGridSize
         self.__playerSize = globals.playerSize
+
+        # TODO : Verificar se os collectables não estão
+        #        sendo criados um em cima dos outros ou
+        #        nas bordas das telas
 
         # Cria os Triangle Collectables
         while len(self.__collectablesTriangles) < globals.totalTriangleCollectables:
@@ -35,7 +37,7 @@ class Collectables(object):
             x = randint(0,self.__mapSize[0])
             y = randint(0,self.__mapSize[1])
             if not self.__obstacles.checkCollisionWithPlayer([x,y]):
-                self.__collectablesCircle.insert(0,[x,y]);
+                self.__collectablesCircle.insert(0,[x,y]);                
 
         # Cria os BOX Collectables
         while len(self.__collectablesBox) < globals.totalBoxCollectables:
@@ -45,6 +47,25 @@ class Collectables(object):
                 self.__collectablesBox.insert(0,[x,y]);
 
         return None
+
+    def update(self,player):
+
+        pos = player.getPosition()
+
+        if pos in self.__collectablesBox:
+            self.__collectablesBox.remove(pos)
+            player.setJustEat(True)
+            player.addToScore(globals.pointBox)
+
+        if pos in self.__collectablesTriangles:
+            self.__collectablesTriangles.remove(pos)
+            player.setJustEat(True)
+            player.addToScore(globals.pointTriangle)
+
+        if [pos[0]+1,pos[1]+1] in self.__collectablesCircle:
+            self.__collectablesCircle.remove([pos[0]+1,pos[1]+1])
+            player.setJustEat(True)
+            player.addToScore(globals.pointCircle)
 
     def draw(self,frameBuffer,pygame):
 
