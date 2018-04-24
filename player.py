@@ -14,6 +14,7 @@ class Player(object):
     __color = ""
     __direction = "LEFT"
     __score = 0
+    __level = 1
     __needToGrow = False
 
     # o player morreu?
@@ -39,6 +40,22 @@ class Player(object):
         self.__color = globals.playerColor
         # player não está morto!
         self.isDead = False
+
+    def resetPlayer(self):
+        # carrega posição inicial do po player    
+        initialPosition = globals.playerInitialPosition
+
+        #reinicia o player
+        self.__positions = [
+        [int(initialPosition[0]),int(initialPosition[1])],
+        [int(initialPosition[0]),int(initialPosition[1])-1],
+        [int(initialPosition[0]),int(initialPosition[1])-2]]
+
+        self.__direction = "LEFT"
+
+        # player não está morto!
+        self.isDead = False
+
 
     def draw(self,frameBuffer,pygame):
 
@@ -111,6 +128,10 @@ class Player(object):
     def getPosition(self):
         return self.__positions[0]
 
+    # em que nível o jogador está
+    def getLevel(self):
+        return self.__level
+
     # define se o player está morto
     def setIsDead(self,value):
         self.isDead = value
@@ -122,3 +143,7 @@ class Player(object):
     # adiciona ao ponto do jogador
     def addToScore(self,value):
         self.__score += value
+
+    # troca o nível do jogador
+    def setLevel(self,value):
+        self.__level = value

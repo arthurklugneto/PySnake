@@ -25,6 +25,34 @@ class Collectables(object):
         #        sendo criados um em cima dos outros ou
         #        nas bordas das telas
 
+        # Gera as comidinhas!!!
+        self.__generateCollectables()
+
+    def update(self,player):
+
+        pos = player.getPosition()
+
+        if pos in self.__collectablesBox:
+            self.__collectablesBox.remove(pos)
+            player.setJustEat(True)
+            player.addToScore(globals.pointBox)
+
+        if pos in self.__collectablesTriangles:
+            self.__collectablesTriangles.remove(pos)
+            player.setJustEat(True)
+            player.addToScore(globals.pointTriangle)
+
+        if [pos[0]+1,pos[1]+1] in self.__collectablesCircle:
+            self.__collectablesCircle.remove([pos[0]+1,pos[1]+1])
+            player.setJustEat(True)
+            player.addToScore(globals.pointCircle)
+
+        # O Player comeu todos os colectáveis. Gere mais!!!
+        if not self.__collectablesBox and not self.__collectablesTriangles and not self.__collectablesCircle:
+            self.__generateCollectables()
+
+    def __generateCollectables(self):
+        
         # Cria os Triangle Collectables
         while len(self.__collectablesTriangles) < globals.totalTriangleCollectables:
             x = randint(0,self.__mapSize[0])
@@ -45,27 +73,6 @@ class Collectables(object):
             y = randint(0,self.__mapSize[1])
             if not self.__obstacles.checkCollisionWithPlayer([x,y]):
                 self.__collectablesBox.insert(0,[x,y]);
-
-        return None
-
-    def update(self,player):
-
-        pos = player.getPosition()
-
-        if pos in self.__collectablesBox:
-            self.__collectablesBox.remove(pos)
-            player.setJustEat(True)
-            player.addToScore(globals.pointBox)
-
-        if pos in self.__collectablesTriangles:
-            self.__collectablesTriangles.remove(pos)
-            player.setJustEat(True)
-            player.addToScore(globals.pointTriangle)
-
-        if [pos[0]+1,pos[1]+1] in self.__collectablesCircle:
-            self.__collectablesCircle.remove([pos[0]+1,pos[1]+1])
-            player.setJustEat(True)
-            player.addToScore(globals.pointCircle)
 
     def draw(self,frameBuffer,pygame):
 

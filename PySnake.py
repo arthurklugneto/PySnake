@@ -40,6 +40,7 @@ pygame.display.set_caption(globals.config["title"])
 
 # define a fonte do texto que será utilizado no jogo
 gameFont = pygame.font.SysFont('Calibri', 16)
+gameFontGameOver = pygame.font.SysFont('Calibri', 36)
 
 # define o relógio do jogo
 globals.clock = pygame.time.Clock()
@@ -91,43 +92,48 @@ try:
         if keys[pygame.K_DOWN] and keys[pygame.K_RIGHT]:
             player.sefDirection("DOWN-RIGHT")           
 
-        '''
-        # cuida dos eventos de entrada do teclado (antigo)
-        if event.type == pygame.KEYDOWN:
-            
-            if event.key == pygame.K_LEFT:
-                player.sefDirection("LEFT")
-            if event.key == pygame.K_RIGHT:
-                player.sefDirection("RIGHT")
-            if event.key == pygame.K_UP:
-                player.sefDirection("UP")
-            if event.key == pygame.K_DOWN:
-                player.sefDirection("DOWN")
-        '''       
-
         # verifica se o player colidiu com um obstáculo
         if obstacles.checkCollisionWithPlayer(player.getPosition()):
             player.setIsDead(True)
 
+        # desenha todos os objetos do jogo
+        obstacles.draw(frameBuffer,pygame)
+        collectables.draw(frameBuffer,pygame)
+
         # atualiza o player caso ele não tenha morrido
         if not player.isDead :
             if count % globals.refreshRate == 0:
+                
+                # define o nível do jogo
+                level = int(map(player.getScore(),0,globals.maxScore,1,globals.maxLevel))
+                refreshRate = int(map(player.getLevel(),1,globals.maxLevel,globals.maxRefreshRate,1))
+                globals.refreshRate = refreshRate
+                player.setLevel(level)
+
                 player.update()
                 collectables.update(player)
+                
+        else:
+            # mostra a mensagem de gameover
+            score.drawGameOver(player,gameFontGameOver,frameBuffer)
+            # permite reiniciar o jogo
+            if keys[pygame.K_UP]:
+                player.resetPlayer();
+                player.setIsDead(False);
+
 
         # desenha todos os objetos do jogo
         mapa.draw(frameBuffer,pygame)
         player.draw(frameBuffer,pygame)
         score.draw(player,gameFont,frameBuffer)
-        obstacles.draw(frameBuffer,pygame)
-        collectables.draw(frameBuffer,pygame)
-
+        
         # atualiza o framebuffer (desenha o que estiver na memória de vídeo)
         pygame.display.flip()
 
         # atualiza relógio
         globals.clock.tick(globals.fps)
         count += 1
+        
 finally:
    pygame.quit()
 
